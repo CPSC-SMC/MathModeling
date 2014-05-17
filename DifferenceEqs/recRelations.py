@@ -48,6 +48,18 @@ print 'Interest rate %f%%' % (r*100)
 print 'Payment amount $%.2f' % (Q)
 print 'Final balance $%.2f after %d months' % (residual, n) 
 
-print 'Estimated Payment $', (1+r)**n * (1-r) / (1-r**n) * B0
 
-# 3. 
+# 3. Fibonacci sequence F(n+2) = F(n+1) + F(n), F(1) = 1, F(0) = 0
+fib=[ 0, 1 ]
+def Fibonacci(n, y):
+    if n < len(y):
+        return y[n]
+    elif n == len(y):
+        y += [y[-1] + y[-2]]
+        return y[-1]
+    else:
+        return Fibonacci(n-1,y) + Fibonacci(n-2,y)
+    
+print Fibonacci(40,fib), fib
+
+        
