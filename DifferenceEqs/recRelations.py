@@ -8,6 +8,7 @@ Created on Thu May 15 15:46:38 2014
 """
 
 import numpy as np
+from scipy.misc import *
 import matplotlib.pyplot as plt
 
 plt.close()
@@ -50,12 +51,30 @@ print 'Final balance $%.2f after %d months' % (residual, n)
 
 
 # 3. Fibonacci sequence F(n+2) = F(n+1) + F(n), F(1) = 1, F(0) = 0
-fib=[ 0, 1 ]
-def Fibonacci(n, y):
+#    compute a generalized fibonacci sequence using y0=0, y1=1
+fib1=[ 0, 1 ]
+def gen_fibonacci(n, y=[ 0,1 ]):
     for i in range(len(y),n+1):
         y += [y[-1] + y[-2]]
         
     return y[-1]
+
+print gen_fibonacci(40), gen_fibonacci(40, fib1)
+print fib1
+
+# 4. Other fibonacci sequences
+fib2 = [-1,2] # different initial conditions
+print gen_fibonacci(40, fib2), fib2
+
+# 5. y(n+2) - A y(n+1) - B y(n) = 0, y(0)=y0, y(1)=y1
+#    solution: y(n) = r**n
+#    r**(n+2) - A r**(n+1) - B r**n = 0
+#    r**2 - A r - B = 0
+ 
+
+# 6. Fibonacci sequence ... direct computation
+#    F(n+2) = f(n+1) + F(n); A = 1
+def fibonacci(n):
+    print range(1,n+1,2)
+    return sum([comb(n,i,exact=1)*5**((i-1)/2) for i in range(1,n+1,2)])/2**(n-1)
     
-print Fibonacci(40,fib)
-print Fibonacci(41,fib)
