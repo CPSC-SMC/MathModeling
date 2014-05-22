@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Logistic Map
+Epidemiology models
 
 Created on Sun May 18 12:56:39 2014
 
@@ -8,28 +8,37 @@ Created on Sun May 18 12:56:39 2014
 """
 
 from numpy import *
+from matplotlib.pyplot import *
+
 
 # define an updating function
 def logistic(y, a, n = 1):
+    """
+    The logistic map, y = a * y * (1-y).
+    a --> the parameter, a value related to the communicability rate
+    y --> the population proportion, the proportion (i.e., y in [0,1]) of infected
+    n --> defaults to 1, the number of logistic iterations
+    """
     for i in range(n):
         y = a*y*(1-y)
     
     return y
 
 def logistic_orbit(y0, a, size=100, period=1):
+    """
+    Compute the forward partial orbit of the logistic map.
+    
+    y0     ---> the initial value in [0,1]
+    a      ---> the parameter
+    size   ---> the number of terms in the orbit
+    period ---> the number of iterations per step (default = 1)
+    """
     vals = [y0]
     for i in range(size):
         vals += [logistic(vals[-1], a, period)]
     
     return vals
     
-
-y = random.rand() # initial value of y is in range [0,1)
-a = 1.5 # a is the parameter and should be between 0 and 4
-
-for i in range(100):
-    y = random.rand()
-    print (y, logistic_orbit(y, 3.2, 2)[-1])
 
 # fixed points of the logisic map
 print logistic(0,1) # y = 0, a = 1
