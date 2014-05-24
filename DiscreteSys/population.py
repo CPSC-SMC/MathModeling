@@ -34,7 +34,7 @@ plt.close()
 max_pop = 1000.
 min_pop = 0.
 y0 = 100.
-a = .05
+a = .0005
 constrained_update = lambda y, a, M, m = 0: y + a*(y-m)*(M-y)
 
 def constrained_gen(y0,a,M,m=0,size=100):

@@ -8,7 +8,7 @@ Created on Sun May 18 12:56:39 2014
 """
 
 from numpy import *
-from matplotlib.pyplot import *
+import matplotlib.pyplot as plt
 
 
 # define the logistic map as an updating function
@@ -41,22 +41,49 @@ def logistic_orbit(y0, a, size=100, period=1):
         yield y
     
 
-# plot 100 random points in the bifurcation diagram of the logistic map
-for i in range(100):
-    y = random.rand()
-    a = random.rand()*4
-    plot (a, logistic(y, a, 1000),'.')
+def logistic_bif(size=100,iter=100,clear=False):
+    """
+    Plot points in the bifurcation diagram of the logistic map
+    
+    size --> the number of points to plot (default=100)
+    """
+    if clear:
+        plt.close()
+        plt.title("Logistic map bifurcation diagram")
+        plt.xlabel(r"The logistic parameter $\lambda$")
+        plt.ylabel(r"Approx. Periodic/Fixed point")
+    for i in range(size):
+        y = random.rand()
+        a = random.rand()*4
+        plot (a, logistic(y, a, iter),'.')
 
-# plot a cobweb plot for the logistic map with a = 3.2
-plot([0,1],[0,1],'b-')
-x = arange(0,1,0.01)
-plot(x,logistic(x,3.2),'g-')
-y = random.rand()
-plot([y,y],[0,y])
-for ynew in logistic_orbit(y, 3.2):
-    plot([y,y],[y,ynew])
-    plot([y, ynew],[ynew,ynew])
-    y = ynew
+def logistic_cobweb(a=2, clear=False):
+    """
+    Plot a cobweb plot for the logistic map with parameter a. Clear the plot
+    if clear = True
+    """
+    if clear:
+        plt.close()
+        plt.title(r"Logistic cobweb plot $\lambda=%f$" % (a))
+        plt.xlabel(r"Previous step $y_{n-1}$")
+        plt.ylabel(r"Current step $y_n$")
+
+    # plot the curve y = x
+    plot([0,1],[0,1],'b-')
+    
+    # plot the logistic map
+    x = arange(0,1,0.01)
+    plot(x,logistic(x,a),'g-')
+    
+    # choose an initial condition at random
+    y = random.rand()
+    plot([y,y],[0,y])
+    
+    # plot each segment of the cobweb plot
+    for ynew in logistic_orbit(y, a):
+        plot([y,y],[y,ynew])
+        plot([y, ynew],[ynew,ynew])
+        y = ynew
 
 # fixed points of the logisic map
 print logistic(0,1) # y = 0, a = 1
@@ -64,3 +91,6 @@ print 1./3, logistic(1./3,3./2) # y = 1/3, a = 3/2
 print 1./2, logistic(1./2,2.) # y = 1/2, a = 2
 
 # periodic points of the logistic map
+
+# plot bifurcation diagram
+logistic_bif(size=10000,clear=True)
