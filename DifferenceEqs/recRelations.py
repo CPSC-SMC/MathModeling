@@ -52,6 +52,7 @@ print 'Final balance $%.2f after %d months' % (residual, n)
 
 # 3. Fibonacci sequence F(n+2) = F(n+1) + F(n), F(1) = 1, F(0) = 0
 #    compute a generalized fibonacci sequence using y0=0, y1=1
+print
 init1=[ 0, 1 ]
 def gen_fibonacci(n, y=[ 0,1 ]):
     for i in range(len(y),n+1):
@@ -62,14 +63,18 @@ def gen_fibonacci(n, y=[ 0,1 ]):
 print gen_fibonacci(40), gen_fibonacci(40, init1)
 print init1
 
+
 # 4. Other fibonacci sequences
+print 
 init2 = [-1,2] # different initial conditions
 print gen_fibonacci(40, init2), init2
+
 
 # 5. y(n+2) - A y(n+1) - B y(n) = 0, y(0)=y0, y(1)=y1
 #    solution: y(n) = C r1**n + D r2**n 
 #    r**(n+2) - A r**(n+1) - B r**n = 0
 #    r**2 - A r - B = 0
+print
 nfib = lambda n, coeffs, roots: dot(coeffs, roots**n)
 poly = [1,-1,-1] # characteristic polynomial for fibonacci
 roots = np.roots(poly)
@@ -79,9 +84,23 @@ coeffs = np.dot(np.linalg.inv(L),[[0],[1]])
 
 print 'Numeric fibonacci', nfib(40, coeffs.T, roots)
 
+
 # 6. Fibonacci sequence ... direct computation
 #    F(n+2) = F(n+1) + F(n); A = B = 1
 def fibonacci(n):
-    print range(1,n+1,2)
-    return sum([comb(n,i,exact=1)*5**((i-1)/2) for i in range(1,n+1,2)])/2**(n-1)
-    
+    fib = 0
+    rem = 0
+    den = 2**(n-1)
+    for k in [comb(n,i,exact=1)*5**((i-1)/2) for i in range(1,n+1,2)]:
+        rem += (k%den)
+        fib += (k/den) + rem/den
+        rem %= den
+    return fib
+
+print
+print 'Exact sum', fibonacci(400)
+
+
+
+
+
