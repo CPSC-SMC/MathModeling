@@ -7,20 +7,18 @@ Created on Mon May 19 14:00:12 2014
 
 import matplotlib.pyplot as plt
 
-def predprey(x,y,a,b,c,d):
-    xnew = (1+a)*x - b*y*x
+def predprey(x,y,a,b=0.001,c=0.01,d=0.01):
+    xnew = a*x - b*y*x
     ynew = -c*y + d*x*y
-    return (xnew,ynew)
+    return (max(xnew,0),max(ynew,0))
 
-x = 1000.
-y = 10.
-a = 1.
-b = 0.025
-c = 1.
-d = 0.005
+x = 100
+y = 50
+a = 1.10081
 
-for i in range(10):
+plt.close()
+for i in range(200):
     print x,y
     plt.plot(i,x,'ro-')
     plt.plot(i,y,'bo-')
-    (x,y) = predprey(x,y,a,b,c,d)
+    (x,y) = predprey(x,y,a)
