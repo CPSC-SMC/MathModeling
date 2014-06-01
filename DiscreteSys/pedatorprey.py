@@ -24,12 +24,12 @@ def predprey(x,y,a,b,c,d,t=1):
     return (x,y)
 
 # setup parameters
-x = 130
-y = 20
-a = 0.1
-b = 0.002
-c = 0.1
-d = 0.001
+x = 100
+y = 5
+a = 1.1
+b = 0.1
+c = 1 
+d = 0.01
 
 # setup prey and pred lists
 prey = []

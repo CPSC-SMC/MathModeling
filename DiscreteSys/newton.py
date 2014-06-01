@@ -19,17 +19,20 @@ def newton(f,x,dx=0.00001):
     dx ---> a small value to use when approximating the derivative
     '''
     df = (f(x+dx)-f(x-dx))/(2*dx)
-    x += f(x)/df
+    x -= f(x)/df
     return x
 
 # setup initial guess
 plt.close(1)
-func = lambda x: np.sin(2*x)
-xs = np.arange(start=-np.pi,stop=np.pi,step=100)
-plt.plot(xs,func(xs),'b-')
-x = 1
+func = lambda x: np.sin(x**2)
+xs = np.linspace(-np.pi,np.pi,101)
+plt.plot(xs,func(xs),'-')
+x = 1.5
+plt.plot(x,func(x),'o')
 for i in range(10):
     xnew = newton(func, x)
-    plt.plot([x,xnew,xnew],[func(x),0,func(xnew)],'r-')
+    plt.plot([x,xnew,xnew],[func(x),0,func(xnew)],'-+')
     x = xnew
 
+plt.plot(x,func(x),'o')
+print '%.5fpi is the best estimate for a root of this function' % (x/np.pi)
