@@ -21,7 +21,12 @@ unconstrained = lambda n, y0, a: (1+a)**n * y0
 # a = (y(n)/y(0))**(1/n)-1
 y0 = 100
 y12 = 200
-a = (2)**(1./12)-1
+a = (float(y12)/y0)**(1./12)-1
+plt.close(1)
+plt.figure(1)
+plt.title('Unconstrained population growth')
+plt.xlabel('Time periods')
+plt.ylabel('Population size')
 plt.plot(unconstrained(np.arange(0,20),y0,a)) 
 
 # Constrained growth
@@ -30,7 +35,7 @@ plt.plot(unconstrained(np.arange(0,20),y0,a))
 # y0 is the initial population
 # a is the parameter
 # D y (n) = a * (y(n)-min_pop) * (max_pop-y(n)) / (M-m)**2
-plt.close()
+plt.close(2)
 max_pop = 1000.
 min_pop = 0.
 y0 = 100.
@@ -44,7 +49,11 @@ def constrained_gen(y0,a,M,m=0,size=100):
         y = constrained_update(y,a,M,m)
 
     yield y
-        
+
+plt.figure(2)
+plt.title('Constrainted population growth')
+plt.xlabel('Time periods')
+plt.ylabel('Population size')
 i = 0
 for y in constrained_gen(y0,a,max_pop,min_pop):
     i+=1

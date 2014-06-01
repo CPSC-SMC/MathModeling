@@ -47,6 +47,7 @@ def logistic_bif(size=100,iter=100,clear=False):
     
     size --> the number of points to plot (default=100)
     """
+    intervals = [0,0.5,1,1.5,2,2.5,3,3,3.5,3.5,3.5,3.5,3.5,3.5]
     if clear:
         plt.close()
         plt.title("Logistic map bifurcation diagram")
@@ -54,7 +55,8 @@ def logistic_bif(size=100,iter=100,clear=False):
         plt.ylabel(r"Approx. Periodic/Fixed point")
     for i in range(size):
         y = random.rand()
-        a = random.rand()*4
+        draw = random.randint(0,len(intervals))
+        a = intervals[draw] + 0.5*random.rand()
         plot (a, logistic(y, a, iter),'.')
 
 def logistic_cobweb(a=2, clear=False):
@@ -93,4 +95,4 @@ print 1./2, logistic(1./2,2.) # y = 1/2, a = 2
 # periodic points of the logistic map
 
 # plot bifurcation diagram
-logistic_bif(size=10000,clear=True)
+logistic_bif(size=1000,clear=True)
