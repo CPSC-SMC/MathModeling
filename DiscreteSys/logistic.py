@@ -57,7 +57,7 @@ def logistic_bif(size=100,iter=100,clear=False):
         y = random.rand()
         draw = random.randint(0,len(intervals))
         a = intervals[draw] + 0.5*random.rand()
-        plot (a, logistic(y, a, iter),'.')
+        plt.plot (a, logistic(y, a, iter),'.')
 
 def logistic_cobweb(a=2, clear=False):
     """
@@ -71,28 +71,32 @@ def logistic_cobweb(a=2, clear=False):
         plt.ylabel(r"Current step $y_n$")
 
     # plot the curve y = x
-    plot([0,1],[0,1],'b-')
+    plt.plot([0,1],[0,1],'b-')
     
     # plot the logistic map
     x = arange(0,1,0.01)
-    plot(x,logistic(x,a),'g-')
+    plt.plot(x,logistic(x,a),'g-')
     
     # choose an initial condition at random
     y = random.rand()
-    plot([y,y],[0,y])
+    plt.plot([y,y],[0,y])
     
     # plot each segment of the cobweb plot
     for ynew in logistic_orbit(y, a):
-        plot([y,y],[y,ynew])
-        plot([y, ynew],[ynew,ynew])
+        plt.plot([y,y],[y,ynew])
+        plt.plot([y, ynew],[ynew,ynew])
         y = ynew
 
-# fixed points of the logisic map
-print logistic(0,1) # y = 0, a = 1
-print 1./3, logistic(1./3,3./2) # y = 1/3, a = 3/2
-print 1./2, logistic(1./2,2.) # y = 1/2, a = 2
+def main():
+    # fixed points of the logisic map
+    print logistic(0,1) # y = 0, a = 1
+    print 1./3, logistic(1./3,3./2) # y = 1/3, a = 3/2
+    print 1./2, logistic(1./2,2.) # y = 1/2, a = 2
+    
+    # periodic points of the logistic map
+    
+    # plot bifurcation diagram
+    logistic_bif(size=1000,clear=True)
 
-# periodic points of the logistic map
-
-# plot bifurcation diagram
-logistic_bif(size=1000,clear=True)
+if __name__ == "__main__":
+    main()
