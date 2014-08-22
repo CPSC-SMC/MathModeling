@@ -6,6 +6,7 @@
 
 
 
+
 # 1. Create an array X of values between 0 and 2 with numpy.linspace(...). Use num=21.
 
 
@@ -26,6 +27,7 @@
 
 
 
+
 # 5. Plot this curve 
 
 
@@ -38,7 +40,15 @@
 #       log(x) when x >=5
 
 
+
+
+
+
+
+        
+
 # 7. Use list comprehension to create the y-values
 
 
 # 8. plot the piecewise function
+
