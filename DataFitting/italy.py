@@ -42,3 +42,7 @@ plt.plot(Year, italy(Year, M, B, k), '--')
 
 # plot the fit values for each data point
 plt.plot(year, italy(year, M, B, k), 'o')
+
+# Use the model to predict the population of Italy in 2014
+print 'Predicting the population of Italy in 2014:', italy(2014,M,B,k), 'million'
+
