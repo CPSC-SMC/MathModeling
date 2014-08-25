@@ -18,7 +18,8 @@ def onedim(s, p=0.5, steps=1):
         s += draws
     return s
 
-plt.close('all')
+plt.close(1)
+plt.figure(1)
 plt.subplot(321)
 hist(onedim(np.zeros(10000),steps=1000),bins=30)
 plt.title('Unbiased 1D random walk')
@@ -50,10 +51,19 @@ hist2d(x, y,bins=20)
 plt.title('Westward bias 2D nn random walk')
 
 
-
-
 # 2D poisson random walk 
 # (exponentially distributed distance, uniformly distributed)
+x = np.zeros(100)
+y = np.zeros(100)
+far = rdm.exponential(size=100)
+direction = rdm.uniform(high=2*np.pi,size=100)
+for i in range(len(x)-1):
+    x[i+1] = x[i] + far[i]*np.cos(direction[i])
+    y[i+1] = y[i] + far[i]*np.sin(direction[i])
+
+plt.figure(2)
+plt.plot(x, y, '-o')
+
 
 
 
