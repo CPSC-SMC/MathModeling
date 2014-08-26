@@ -18,8 +18,7 @@ def onedim(s, p=0.5, steps=1):
         s += draws
     return s
 
-plt.close(1)
-plt.figure(1)
+plt.close()
 plt.subplot(321)
 hist(onedim(np.zeros(10000),steps=1000),bins=30)
 plt.title('Unbiased 1D random walk')
