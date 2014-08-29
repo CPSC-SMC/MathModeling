@@ -28,27 +28,27 @@ print 'Final balance $%.2f after %d months' % (P(n,r,P0), n)
 
 
 # 2. Paying off a loan B(n+1) = (1+r)*B(n) - Q
-r = 0.05/12 #   r --> interest rate
+r = 0.05/12 #   r --> monthly interest rate
 n = 60      #   n --> time period
 B0 = 12000. #   B0 ---> Initial balance
 Q = 200     #   Q ---> Payment amount
 # D P(n) = r*P(n) - Q
-B = lambda n, r, B0, Q: B0 if n == 0 else (1+r)*B(n-1,r,B0,Q)-Q
-residual = B(n,r,B0,Q)
-it = 0
+B = lambda n, B0, r, Q: (1+r)**n*(B0 - Q/r) + Q/r
 
-while abs(residual/n) >= 0.005:
-    it+=1
-    Q += residual / n
-    residual = B(n,r,B0,Q)
 
 print 
-print 'After', it, 'iterations:'
 print 'Initial balance $%.2f' % (B0)
 print 'Interest rate %f%%' % (r*100)
 print 'Payment amount $%.2f' % (Q)
-print 'Final balance $%.2f after %d months' % (residual, n) 
+print 'Final balance $%.2f after %d months' % (B(n, B0, r, Q), n) 
 
+Q = r*(1+r)**60/((1+r)**60 - 1)*B0
+
+print 
+print 'Initial balance $%.2f' % (B0)
+print 'Interest rate %f%%' % (r*100)
+print 'Payment amount $%.2f' % (Q)
+print 'Final balance $%.2f after %d months' % (B(n, B0, r, Q), n) 
 
 # 3. Fibonacci sequence F(n+2) = F(n+1) + F(n), F(1) = 1, F(0) = 0
 #    compute a generalized fibonacci sequence using y0=0, y1=1
