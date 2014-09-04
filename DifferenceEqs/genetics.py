@@ -11,27 +11,33 @@ import matplotlib.pyplot as plt
 def draw_child(p):
     '''
     draw a single child
+    
+    return value is the number of dominant alleles
     '''
-    draw = np.random.binomial(2,p)
-    if draw == 0:
-        return 'aa'
-    elif draw == 1:
-        return 'Aa'
-    else:
-        return 'AA'
+    return np.random.binomial(2,p)
     
 def draw_children(p,size):
     '''
     draw several children
     '''
-    return [draw_child(p) for i in range(size)]    
+    return np.array([draw_child(p) for i in range(size)])
     
 
-# no selection
-# randomly select 25 children
-print 'p=0.2', draw_children(0.2,25)
-print 'p=0.8', draw_children(0.8,25)
+size = 1000
+print 'no selection'
+print 'randomly select',size,'children'
+children = draw_children(0.2,size)
+print 'p0=0.2', 'p1=', sum(children)/2./len(children)
+children = draw_children(0.8,size)
+print 'p0=0.8', 'p1=', sum(children)/2./len(children)
 
 # with selection (remove 'aa' and recalculate p)
-A = draw_children(0.2,100)
-print '100 children after selection', A
+print 'with selection'
+print 'randomly select',size,'children'
+children = draw_children(0.2,size)
+survivors = filter(lambda x: x != 0, children)
+print 'p0=0.2', 'p1=', sum(survivors)/2./len(survivors)
+
+children = draw_children(0.8,size)
+survivors = filter(lambda x: x != 0, children)
+print 'p0=0.8', 'p1=', sum(survivors)/2./len(survivors)
