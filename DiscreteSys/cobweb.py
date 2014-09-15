@@ -19,23 +19,19 @@ def cobweb(x0, f, ginv = lambda x: x, n = 20):
     n ---> the number of cobweb iterations to use (default 20)
     """
 
-    x = x0    
-    xmax = x
-    xmin = x
-    ymax = f(x)
-    ymin = f(x)
+    x = [x0]
+    y = [f(x0)]    
+
     for i in range(n):
-        xnew = ginv(f(x))
-        X = [x, xnew, xnew]
-        Y = [f(x), f(x), f(xnew)]
-        plt.plot(X, Y, 'k--')
-        x = xnew
-        xmax = max(xmax, x)
-        xmin = min(xmin, max(x,0))
-        ymax = max(ymax, f(x))
-        ymin = min(ymin, max(f(x),0))
+        q = x[-1]
+        newq = ginv(f(q))        
+        x.append(newq)
+        x.append(newq)
+        y.append(f(q))
+        y.append(f(newq))
     
-    return [xmin, xmax, ymin, ymax]
+    plt.plot(x, y, 'k--', label = 'cobweb')
+    return [min(x), max(x), min(y), max(y)]
 
 def supply(p):
     return 2*p+10
@@ -53,7 +49,7 @@ plt.plot(x, demand_price(x), label = 'demand')
 plt.title('Cobweb plot of supply vs. demand')
 plt.xlabel('Quantity produced / purchased')
 plt.ylabel('Price')
-plt.legend()
+plt.legend(loc='best')
 
 
 
