@@ -8,7 +8,6 @@ Created on Fri Aug 22 12:10:17 2014
 """
 
 import numpy as np
-from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 
 # Species area curves
