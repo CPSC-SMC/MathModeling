@@ -53,4 +53,17 @@ final = np.array(final)
 final_x = final[:,0]
 final_y = final[:,1]
 
-plt.hist2d(final_x, final_y)
+x_min = min(final_x)
+x_max = max(final_x)
+y_min = min(final_y)
+y_max = max(final_y)
+bin_sq = 2
+shift = 0.5
+#x_bins = np.linspace(x_min-shift,x_max+1-shift,np.ceil((x_max-x_min)/bin_sq))
+#y_bins = np.linspace(x_min-shift,x_max+1-shift,np.ceil((x_max-x_min)/bin_sq))
+
+plt.hist2d(final_x, final_y, bins=15, cmap=plt.cm.YlOrRd_r)
+#plt.hist2d(final_x, final_y, bins=[x_bins, y_bins])
+#plt.hexbin(final_x,final_y,gridsize=15, cmap=plt.cm.YlOrRd_r)
+plt.xticks([])
+plt.yticks([])
