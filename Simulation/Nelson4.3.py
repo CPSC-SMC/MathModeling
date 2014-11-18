@@ -48,7 +48,7 @@ e3 = receiving an order
 """
 
 inv_init = 700
-order_thresh = 500
+order_thresh = 600
 inv_max = 1000
 
 demand_mu = 250
