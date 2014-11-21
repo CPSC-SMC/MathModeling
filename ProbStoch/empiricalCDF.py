@@ -57,6 +57,6 @@ Mean = 0, Standard Deviation = 1
 
 Use 100 different empirical data sets to generate pictures of the cdfs.
 '''
-xs = np.linspace(-4,4,10)
-for i in range(100):
-    plt.plot(xs,empirical_cdf(xs,data=np.random.normal(size=50)),'-')
+d = np.random.binomial(n=2, p=0.50, size=50)
+xs = np.linspace(-1,3,1001)
+plt.plot(xs,empirical_cdf(xs,data=d),'.')
