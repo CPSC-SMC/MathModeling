@@ -9,6 +9,7 @@ Created on Thu Nov 20 09:29:13 2014
 
 import numpy as np
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 f = lambda x: x[0]**2 + (2-x[1]**2)**2 + x[1] + 2
 
